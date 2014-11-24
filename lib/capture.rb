@@ -47,7 +47,7 @@ module Capture
 
     serializer = SimpleXlsx::Serializer.new("开测信息/#{Time.now.to_s}.xlsx") do |doc|
       doc.add_sheet(Time.now.to_s) do |sheet|
-        sheet.add_row(%w{游戏ID 游戏名 开测时间 状态})
+        sheet.add_row(%w{游戏ID 游戏名 状态 开测时间})
         hash.keys.each do |name|
           sheet.add_row(hash[name])
         end
@@ -73,7 +73,7 @@ module Capture
 
     serializer = SimpleXlsx::Serializer.new("开服信息/#{Time.now.to_s}.xlsx") do |doc|
       doc.add_sheet(Time.now.to_s) do |sheet|
-        sheet.add_row(%w{游戏ID 游戏名 开服时间 开服信息})
+        sheet.add_row(%w{游戏ID 游戏名 开服信息 开服时间})
         hash.keys.each do |name|
           sheet.add_row(hash[name])
         end

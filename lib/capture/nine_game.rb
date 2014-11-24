@@ -20,7 +20,7 @@ class NineGame
         name = name.split("(")[0]
         time = tr.css("td.timetr span").text
         status = tr.css("td.stattr").text
-        game[name] = [day + " " + time, status]
+        game[name] = [status, day + " " + time]
         games << game
       end
     end
@@ -47,7 +47,7 @@ class NineGame
         event_list.each do |e|
           events << e.css("span.t").text + " " + e.css("p.des").text
         end
-        game[name] = [day + " " + time] + events
+        game[name] = [events.join(";"), day + " " + time]
         games << game
       end
     end

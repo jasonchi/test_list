@@ -17,7 +17,7 @@ class DangLe
       name = name.split("(")[0]
       time = tr.css("td")[2].text
       status = tr.css("td")[3].text
-      game[name] = [Time.now.year.to_s + "-" + time, status]
+      game[name] = [status, Time.now.year.to_s + "-" + time]
       games << game
     end
     return games
@@ -34,7 +34,7 @@ class DangLe
       name = name.split("(")[0]
       time = tr.css("td")[2].text
       info = tr.css("td")[3].text
-      game[name] = [Time.now.year.to_s + "-" + time, info]
+      game[name] = [info, Time.now.year.to_s + "-" + time]
       games << game
     end
     return games
