@@ -5,9 +5,16 @@ require "capture/nine_game"
 module Capture
 
   # Your code goes here...
-  def self.get_games_list
-    ng_list = NineGame.get_list
-    dl_list = DangLe.get_list
+  def self.get_kc_list
+    ng_list = NineGame.get_kc_list
+    dl_list = DangLe.get_kc_list
+    list = ng_list | dl_list
+    return list
+  end
+
+  def self.get_kf_list
+    ng_list = NineGame.get_kf_list
+    dl_list = DangLe.get_kf_list
     list = ng_list | dl_list
     return list
   end
@@ -17,14 +24,14 @@ module Capture
     worksheet =  workbook[0]
     data = worksheet.extract_data
     hash = {}
-    data[1..-1].each do |d|
-      hash[d[3].to_s.split('(')[0]] = [d[0], d[1], d[2], d[3], d[4]]
+    data.each do |d|
+      hash[d[1].to_s.split('(')[0]] = [d[0], d[1]]
     end
     return hash
   end
 
-  def self.capture
-    games = get_games_list
+  def self.kaice
+    games = get_kc_list
     rows = read_xlsx
     hash = {}
     games.each do |g|
@@ -32,18 +39,46 @@ module Capture
       row = rows[key]
       if row
         #names[g.keys[0]] = [d[0], d[1], d[2], d[3], g[g.keys[0]]]
-        hash[key] = [row[0], row[1], row[2], row[3], g[key]]
+        hash[key] = [row[0], key] + g[key]
       else
-        hash[key] = [nil, nil, nil, key, g[key]]
+        hash[key] = [nil, key] + g[key]
       end
     end
 
-    serializer = SimpleXlsx::Serializer.new("开服开测信息/#{Time.now.to_s}.xlsx") do |doc|
+    serializer = SimpleXlsx::Serializer.new("开测信息/#{Time.now.to_s}.xlsx") do |doc|
       doc.add_sheet(Time.now.to_s) do |sheet|
+        sheet.add_row(%w{游戏ID 游戏名 开测时间 状态})
         hash.keys.each do |name|
           sheet.add_row(hash[name])
         end
       end
     end
   end
+
+  def self.kaifu
+    games = get_kf_list
+    rows = read_xlsx
+    hash = {}
+    games.each do |g|
+      key = g.keys[0]
+      row = rows[key]
+      
+      if row
+        #names[g.keys[0]] = [d[0], d[1], d[2], d[3], g[g.keys[0]]]
+        hash[key] = [row[0], key] + g[key]
+      else
+        hash[key] = [nil, key] + g[key]
+      end
+    end
+
+    serializer = SimpleXlsx::Serializer.new("开服信息/#{Time.now.to_s}.xlsx") do |doc|
+      doc.add_sheet(Time.now.to_s) do |sheet|
+        sheet.add_row(%w{游戏ID 游戏名 开服时间 开服信息})
+        hash.keys.each do |name|
+          sheet.add_row(hash[name])
+        end
+      end
+    end
+  end
+
 end

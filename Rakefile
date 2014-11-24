@@ -5,6 +5,10 @@ require 'capture'
 
 desc "capture test list from nine game and dang le"
 
-task :capture do
-  Capture.capture
+task :kaice do
+  Capture.kaice
+end
+
+task :kaifu do
+  Capture.kaifu
 end
