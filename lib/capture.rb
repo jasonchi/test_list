@@ -45,7 +45,7 @@ module Capture
       end
     end
 
-    serializer = SimpleXlsx::Serializer.new("开测信息/#{Time.now.to_s}.xlsx") do |doc|
+    serializer = SimpleXlsx::Serializer.new("kaice/#{Time.now.strftime('%Y%m%d%H%M%S')}.xlsx") do |doc|
       doc.add_sheet(Time.now.to_s) do |sheet|
         sheet.add_row(%w{游戏ID 游戏名 状态 开测时间})
         hash.keys.each do |name|
@@ -71,7 +71,7 @@ module Capture
       end
     end
 
-    serializer = SimpleXlsx::Serializer.new("开服信息/#{Time.now.to_s}.xlsx") do |doc|
+    serializer = SimpleXlsx::Serializer.new("kaifu/#{Time.now.strftime('%Y%m%d%H%M%S')}.xlsx") do |doc|
       doc.add_sheet(Time.now.to_s) do |sheet|
         sheet.add_row(%w{游戏ID 游戏名 开服信息 开服时间})
         hash.keys.each do |name|
