@@ -31,11 +31,11 @@ ruby安装完以后安装DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe （同样
 解压完以后 打开开始菜单 运行里面输入 cmd
 切换到 D盘 直接输入 d:
 然后cd DevKit
+然后运行 ruby dk.rb init
 然后 打开文件夹下面 config.yml
 在最后一行加入 ruby 安装的目录 默认应该在C盘下
 如：- C:\Ruby21-x64
 
-然后运行 ruby dk.rb init
 没问题的话 再运行 ruby dk.rb install
 
 然后在开始菜单找到git目录 打开 git_bash
