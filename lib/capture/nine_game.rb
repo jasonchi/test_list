@@ -45,7 +45,7 @@ class NineGame
         event_list = inner_doc.css("ul.event-list li.android")
         events = []
         event_list.each do |e|
-          events << e.css("span.t").text + " " + e.css("p.des").text
+          events << e.css("p.des").text
         end
         game[name] = [events.join(";"), day + " " + time]
         games << game
